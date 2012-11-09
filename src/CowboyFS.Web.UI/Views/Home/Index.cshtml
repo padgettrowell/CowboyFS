@@ -1,10 +1,6 @@
-﻿@{
-    ViewBag.Title = "Home";
+﻿@model CowboyFS.Web.UI.ViewModels.BrowseViewModel
+
+@{
+    ViewBag.Title = Model.RelativePath;
+    Html.RenderPartial("ResultsRenderer", Model);
 }
-<ul data-role="listview">
-    <li><a href="#">Root library 1</a></li>
-    <li><a href="#">Root library 2</a></li>
-    <li><a href="#">Root library 3</a></li>
-    <li><a href="#">Root library 4</a></li>
-    <li><a href="#">Root library 5</a></li>
-</ul>

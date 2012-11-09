@@ -1,0 +1,22 @@
+﻿@model CowboyFS.Web.UI.ViewModels.BrowseViewModel
+
+<ul data-role="listview">
+    
+    @{
+        //Home link
+        <li>@Html.ActionLink("Home", "Index")</li>        
+        
+        //Folders
+        foreach (var result in Model.Folders)
+        {
+            <li>@Html.ActionLink(result.FileName, "Index", new { library = Model.CurrentLibrary.LibraryId, relPath = result.RelativePathName})</li>
+        }
+        
+        //Files
+        
+        foreach (var result in Model.Files)
+        {
+            <li>@result.FileName</li>
+        }
+    }
+</ul>
