@@ -31,6 +31,8 @@ namespace CowboyFS.Web.UI.Services
                 {
                     if (findData.cFileName == "." || findData.cFileName == "..")
                         continue;
+                    if (findData.dwFileAttributes.HasFlag(FileAttributes.Hidden) || findData.dwFileAttributes.HasFlag(FileAttributes.System))
+                        continue;
                     if (isGetDirs
                             ? (findData.dwFileAttributes & FileAttributes.Directory) != 0
                             : (findData.dwFileAttributes & FileAttributes.Directory) == 0)
