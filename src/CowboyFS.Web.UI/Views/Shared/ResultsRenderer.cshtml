@@ -4,7 +4,7 @@
     
     @{
         //Home link
-        <li>@Html.ActionLink("Home", "Index")</li>        
+        Html.RenderPartial("Breadcrumb", Model);
         
         //Folders
         foreach (var result in Model.Folders)

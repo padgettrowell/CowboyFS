@@ -1,9 +1,18 @@
 ﻿@model CowboyFS.Web.UI.ViewModels.BrowseViewModel
-<div data-role="controlgroup" data-type="horizontal" data-mini="true" class="ui-corner-all ui-controlgroup ui-controlgroup-horizontal ui-mini">
-    <div class="ui-controlgroup-controls">
-        <a href="index.html" data-role="button" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" class="ui-btn ui-corner-left ui-btn-up-c"><span class="ui-btn-inner ui-corner-left"><span class="ui-btn-text">Yes</span></span></a>
-        <a href="index.html" data-role="button" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" class="ui-btn ui-btn-up-c"><span class="ui-btn-inner"><span class="ui-btn-text">No</span></span></a>
-        <a href="index.html" data-role="button" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" class="ui-btn ui-corner-right ui-controlgroup-last ui-btn-up-c"><span class="ui-btn-inner ui-corner-right ui-controlgroup-last"><span class="ui-btn-text">Maybe</span></span></a>
-    </div>
+<div data-role="controlgroup" data-type="horizontal" data-mini="true">
+    <!-- home -->
+    @Html.ActionLink("Home", "Index",null, new {data_icon="home", data_role="button"} )
+
+    <!-- library -->
+    @if (Model.CurrentLibrary != null)
+    {
+        @Html.ActionLink(Model.CurrentLibrary.DisplayName, "Index", new { library = Model.CurrentLibrary.LibraryId }, new {data_role="button"})    
+    }
+            
+    <!-- Path Parts -->
+    @foreach (var path in Model.PathCrumbs)
+    {
+        @Html.ActionLink(path.Display, "Index", new { library = Model.CurrentLibrary.LibraryId, relPath = path.RelativePath }, new {data_role="button"})
+    }
 </div>
-<p></p>
+
