@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.IO;
+using System.Collections.Specialized;
+using System.Configuration;
 using System.Linq;
 using CowboyFS.Web.UI.Models;
 
@@ -22,10 +23,12 @@ namespace CowboyFS.Web.UI.Services
 
         public IEnumerable<Library> FetchLibraries()
         {
-            yield return new Library(1, @"D:\Dropbox","Dropbox");
-            yield return new Library(2, @"D:\Documents", "My Documents");
-            yield return new Library(3, @"D:\Sql", "Databases");
-            yield return new Library(4, @"D:\Temp", "Temp");
+            NameValueCollection configuredLibries = (NameValueCollection)ConfigurationManager.GetSection("libraries");
+
+            for (int i = 0; i < configuredLibries.Count;i++ )
+            {
+                yield return new Library(i + 1, configuredLibries.GetValues(i)[0], configuredLibries.Keys[i]);
+            }
         }
 
         public IEnumerable<FileResult> FetchResultsForPath(Library library, string relativePath)

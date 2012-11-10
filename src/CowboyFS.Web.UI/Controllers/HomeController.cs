@@ -27,7 +27,7 @@ namespace CowboyFS.Web.UI.Controllers
             return View(new BrowseViewModel(selectedLibrary, relPath, _repository.FetchResultsForPath(selectedLibrary, relPath)));
         }
 
-        public ActionResult ViewFile(int library, string relPath)
+        public ActionResult ViewFile(int library, string relPath, bool returnAsFileDownload = false)
         {
             Library selectedLibrary;
 
@@ -37,7 +37,8 @@ namespace CowboyFS.Web.UI.Controllers
 
             var fileInfo = new System.IO.FileInfo(selectedLibrary.MakePathAbsoluteFromLibrary(relPath));
             string contentType = ContentTypeResolver.ContentTypeForExtension(fileInfo.Extension);
-            return File(fileInfo.FullName, contentType);
+
+            return returnAsFileDownload ? File(fileInfo.FullName, contentType, fileInfo.Name) : File(fileInfo.FullName, contentType);
         }
     }
 }
