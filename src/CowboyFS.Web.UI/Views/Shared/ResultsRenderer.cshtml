@@ -16,7 +16,7 @@
         
         foreach (var result in Model.Files)
         {
-            <li>@result.FileName</li>
+            <li>@Html.ActionLink(result.FileName, "ViewFile", new { library = Model.CurrentLibrary.LibraryId, relPath = result.RelativePathName})</li>
         }
     }
 </ul>

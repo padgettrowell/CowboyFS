@@ -20,7 +20,7 @@ namespace CowboyFS.Web.UI.Models
 
         public string MakePathAbsoluteFromLibrary(string relPath)
         {
-            return string.Join(FullPathName, "relPath");
+            return FullPathName + relPath;
         }
 
     }

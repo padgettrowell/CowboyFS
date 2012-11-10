@@ -27,5 +27,17 @@ namespace CowboyFS.Web.UI.Controllers
             return View(new BrowseViewModel(selectedLibrary, relPath, _repository.FetchResultsForPath(selectedLibrary, relPath)));
         }
 
+        public ActionResult ViewFile(int library, string relPath)
+        {
+            Library selectedLibrary;
+
+            // if we don't have a valid library, return to the index
+            if (!_repository.TryGetLibrary(library, out selectedLibrary))
+                RedirectToAction("Index");
+
+            var fileInfo = new System.IO.FileInfo(selectedLibrary.MakePathAbsoluteFromLibrary(relPath));
+            string contentType = ContentTypeResolver.ContentTypeForExtension(fileInfo.Extension);
+            return File(fileInfo.FullName, contentType);
+        }
     }
 }
