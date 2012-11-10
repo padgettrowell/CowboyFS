@@ -1,22 +1,21 @@
 ﻿@model CowboyFS.Web.UI.ViewModels.BrowseViewModel
 
 <ul data-role="listview">
-    
-    @{
-        //Home link
-        Html.RenderPartial("Breadcrumb", Model);
+@{
+    //Home link
+    Html.RenderPartial("Breadcrumb", Model);
         
-        //Folders
-        foreach (var result in Model.Folders)
-        {
-            <li>@Html.ActionLink(result.FileName, "Index", new { library = Model.CurrentLibrary.LibraryId, relPath = result.RelativePathName})</li>
-        }
-        
-        //Files
-        
-        foreach (var result in Model.Files)
-        {
-            <li>@Html.ActionLink(result.FileName, "ViewFile", new { library = Model.CurrentLibrary.LibraryId, relPath = result.RelativePathName})</li>
-        }
+    //Folders
+    foreach (var result in Model.Folders)
+    {
+        <li>@Html.ActionLink(result.FileName, "Index", new { library = Model.CurrentLibrary.LibraryId, relPath = result.RelativePathName})</li>
     }
+        
+    //Files
+        
+    foreach (var result in Model.Files)
+    {
+        <li>@Html.ActionLink(result.FileName, "ViewFile", new { library = Model.CurrentLibrary.LibraryId, relPath = result.RelativePathName})</li>
+    }
+}
 </ul>
