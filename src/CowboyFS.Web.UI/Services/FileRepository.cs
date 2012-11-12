@@ -39,13 +39,13 @@ namespace CowboyFS.Web.UI.Services
             foreach (string r in folders)
             {
 
-                yield return new FileResult(library.MakePathRelativeToLibrary(r), FileType.Folder);
+                yield return new FileResult(library.MakePathRelativeToLibrary(r), true);
             }
 
             var files = FileSystemEnumerator.GetFiles(fullPath, "*.*");
             foreach (string r in files)
             {
-                yield return new FileResult(library.MakePathRelativeToLibrary(r), FileType.UnknownFile);
+                yield return new FileResult(library.MakePathRelativeToLibrary(r), false);
             }
 
         }

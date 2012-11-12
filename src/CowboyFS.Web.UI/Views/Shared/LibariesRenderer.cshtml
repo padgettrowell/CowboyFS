@@ -5,7 +5,7 @@
     @{
         foreach (var library in Model)
         {
-            <li>@Html.ActionLink(library.DisplayName, "Index", new { library = library.LibraryId})</li>
+            <li><a href="@Url.Action("Index", new { library = library.LibraryId})"><img src="img/folders.png" alt="folder" class="ui-li-icon" />@library.DisplayName</a></li>
         }
     }
 </ul>

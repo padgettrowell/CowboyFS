@@ -14,12 +14,12 @@ namespace CowboyFS.Web.UI.ViewModels
 
         public IEnumerable<FileResult> Folders
         {
-            get { return Results.Where(x => x.FileType == FileType.Folder); }
+            get { return Results.Where(x => x.IsFolder == true); }
         }
 
         public IEnumerable<FileResult> Files
         {
-            get { return Results.Where(x => x.FileType != FileType.Folder); }
+            get { return Results.Where(x => x.IsFolder == false); }
         }
 
         public BrowseViewModel(Library currentLibrary, string relativePath, IEnumerable<FileResult> results)

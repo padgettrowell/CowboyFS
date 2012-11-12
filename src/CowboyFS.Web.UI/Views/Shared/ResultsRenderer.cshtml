@@ -8,14 +8,13 @@
     //Folders
     foreach (var result in Model.Folders)
     {
-        <li>@Html.ActionLink(result.FileName, "Index", new { library = Model.CurrentLibrary.LibraryId, relPath = result.RelativePathName})</li>
+        <li><a href="@Url.Action("Index", new { library = Model.CurrentLibrary.LibraryId, relPath = result.RelativePathName})"><img src="img/folder.png" alt="folder" class="ui-li-icon" />@result.FileName</a></li>
     }
         
     //Files
-        
     foreach (var result in Model.Files)
     {
-        <li>@Html.ActionLink(result.FileName, "ViewFile", new { library = Model.CurrentLibrary.LibraryId, relPath = result.RelativePathName})</li>
+        <li><a href="@Url.Action("ViewFile", new { library = Model.CurrentLibrary.LibraryId, relPath = result.RelativePathName})"><img src="img/@result.IconPath" alt="folder" class="ui-li-icon" />@result.FileName</a></li>
     }
 }
 </ul>

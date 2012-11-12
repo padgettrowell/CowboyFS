@@ -109,7 +109,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\FileResult.cs" />
-    <Compile Include="Models\FileType.cs" />
     <Compile Include="Models\Library.cs" />
     <Compile Include="Models\PathPart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
