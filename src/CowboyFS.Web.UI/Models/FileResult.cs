@@ -17,9 +17,11 @@
         {
             get
             {
-
                 if (IsFolder)
                     return "folder.png";
+
+                if (FileName.IndexOf(".") == -1)
+                    return "file.png";
 
                 var extension = FileName.Substring(FileName.LastIndexOf("."));
                 switch (extension)

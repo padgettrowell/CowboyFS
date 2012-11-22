@@ -29,6 +29,13 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <ExcludeGeneratedDebugSymbol>false</ExcludeGeneratedDebugSymbol>
+    <ExcludeApp_Data>true</ExcludeApp_Data>
+    <PrecompileBeforePublish>false</PrecompileBeforePublish>
+    <PublishDatabases>false</PublishDatabases>
+    <IncludeIisSettings>false</IncludeIisSettings>
+    <DesktopBuildPackageLocation>..\..\build\CowboyFS.Web.UI.zip</DesktopBuildPackageLocation>
+    <DeployIisAppPath>CowboyFS</DeployIisAppPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -123,6 +130,21 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Global.asax" />
+    <Content Include="img\application.png" />
+    <Content Include="img\CowboyFS-demo.png" />
+    <Content Include="img\excel.png" />
+    <Content Include="img\file.png" />
+    <Content Include="img\film.png" />
+    <Content Include="img\folder.png" />
+    <Content Include="img\folders.png" />
+    <Content Include="img\html.png" />
+    <Content Include="img\image.png" />
+    <Content Include="img\music.png" />
+    <Content Include="img\pdf.png" />
+    <Content Include="img\powerpoint.png" />
+    <Content Include="img\text.png" />
+    <Content Include="img\word.png" />
+    <Content Include="img\zip.png" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -161,6 +183,9 @@
   <ItemGroup>
     <Content Include="Views\Shared\Breadcrumb.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\DefaultPackageProfile.pubxml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -177,7 +202,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>61809</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:64214/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
