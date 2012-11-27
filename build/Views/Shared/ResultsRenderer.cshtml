@@ -1,0 +1,20 @@
+﻿@model CowboyFS.Web.UI.ViewModels.BrowseViewModel
+
+<ul data-role="listview" data-filter="true">
+@{
+    //Home link
+    Html.RenderPartial("Breadcrumb", Model);
+        
+    //Folders
+    foreach (var result in Model.Folders)
+    {
+        <li><a href="@Url.Action("Index", new { library = Model.CurrentLibrary.LibraryId, relPath = result.RelativePathName})"><img src="img/folder.png" alt="folder" class="ui-li-icon" />@result.FileName</a></li>
+    }
+        
+    //Files
+    foreach (var result in Model.Files)
+    {
+        <li><a href="@Url.Action("ViewFile", new { library = Model.CurrentLibrary.LibraryId, relPath = result.RelativePathName})"><img src="img/@result.IconPath" alt="folder" class="ui-li-icon" />@result.FileName</a></li>
+    }
+}
+</ul>
