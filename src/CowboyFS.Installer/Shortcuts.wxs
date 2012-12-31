@@ -4,11 +4,14 @@
 	<Fragment>
     <ComponentGroup Id="Shortcuts">
 
-      <Component Id="StartMenuShortcut" Guid="B828A736-06BC-41E3-B159-3D00F2CBD875"  Directory="ApplicationProgramsFolder">       
+      <Component Id="ShartMenuShortcut" Guid="B828A736-06BC-41E3-B159-3D00F2CBD875"  Directory="ApplicationProgramsFolder">       
         <util:InternetShortcut Id="CowboyFSMenuShortcut"
                                    Name="CowboyFS" 
                                    Target="http://localhost/cowboyfs/"          
                                    />
+            
+        
+        
         <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall"/>
         <RegistryValue Root="HKCU" Key="Software\Microsoft\CowboyFS" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
       </Component>
