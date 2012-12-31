@@ -129,6 +129,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="403.html" />
     <Content Include="Global.asax" />
     <Content Include="img\application.png" />
     <Content Include="img\CowboyFS-demo.png" />

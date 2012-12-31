@@ -27,6 +27,7 @@
     <Compile Include="WebSiteContent.wxs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="build.bat" />
     <Content Include="ConfigurationInitialize.wxi" />
     <Content Include="License.rtf" />
   </ItemGroup>

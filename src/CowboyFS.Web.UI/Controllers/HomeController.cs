@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web;
 using System.Web.Mvc;
 using CowboyFS.Web.UI.Models;
 using CowboyFS.Web.UI.Services;
@@ -36,6 +37,10 @@ namespace CowboyFS.Web.UI.Controllers
                 RedirectToAction("Index");
 
             var fileInfo = new System.IO.FileInfo(selectedLibrary.MakePathAbsoluteFromLibrary(relPath));
+
+            if (!selectedLibrary.IsDescendant(fileInfo.FullName))
+                throw new HttpException(403,"No no no!");
+
             string contentType = ContentTypeResolver.ContentTypeForExtension(fileInfo.Extension);
 
             return returnAsFileDownload ? File(fileInfo.FullName, contentType, fileInfo.Name) : File(fileInfo.FullName, contentType);

@@ -1,3 +1,6 @@
+using System;
+using System.IO;
+
 namespace CowboyFS.Web.UI.Models
 {
     public class Library
@@ -23,5 +26,18 @@ namespace CowboyFS.Web.UI.Models
             return FullPathName + relPath;
         }
 
+        public bool IsDescendant(string file)
+        {
+            if (file.Equals(FullPathName, StringComparison.InvariantCultureIgnoreCase))
+                return true;
+
+            var parent = Directory.GetParent(file);
+            
+            if (parent == null)
+                return false;
+            if (parent.FullName.Equals(FullPathName, StringComparison.InvariantCultureIgnoreCase))
+                return true;
+            return IsDescendant(parent.FullName);
+        }
     }
 }

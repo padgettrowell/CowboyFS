@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Configuration;
+using System.IO;
 using System.Linq;
+using System.Web;
 using CowboyFS.Web.UI.Models;
 
 namespace CowboyFS.Web.UI.Services
@@ -35,6 +38,9 @@ namespace CowboyFS.Web.UI.Services
         {
             string fullPath = string.Format("{0}{1}", library.FullPathName, relativePath);
 
+            if (!library.IsDescendant(fullPath))
+                throw new HttpException(403,"No no no!");
+
             var folders = FileSystemEnumerator.GetDirectories(fullPath, "*.*");
             foreach (string r in folders)
             {
@@ -49,5 +55,7 @@ namespace CowboyFS.Web.UI.Services
             }
 
         }
+
+       
     }
 }
