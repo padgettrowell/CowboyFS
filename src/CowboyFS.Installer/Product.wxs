@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" 
+  xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
+	<Product Id="*" Name="CowboyFS" Language="1033" Version="1.0.0.0" Manufacturer="Padgett" UpgradeCode="60ae5f21-f6fc-46d5-9170-3526fc67c8b3">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+    <Media Id="1" Cabinet="MyWeb.cab" EmbedCab="yes" />
+    
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+
+    <!--  * Variables  -->
+    <!-- Configurable install location -->
+    
+    <PropertyRef Id="NETFRAMEWORK45"/>
+
+    <Condition Message="This application requires .NET Framework 4.5. Please install the .NET Framework then run this installer again.">
+      <![CDATA[Installed OR NETFRAMEWORK45]]>
+    </Condition>
+
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLLOCATION" />
+    <!-- Creating directories -->
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <!-- Install stuff into program files folder. -->
+      <Directory Id="ProgramFilesFolder">
+        <!-- In program files create folder with name MyWeb. -->
+        <Directory Id="INSTALLLOCATION" Name="CowboyFS">
+          <!-- This is the folder where the website content will be located -->
+          <Directory Id="MYWEBWEBSITE" Name="Website">
+            <!-- Continue in DirectoryRef with specific name -->
+          </Directory>
+          <!-- Here you can add another directories -->
+        </Directory>
+      </Directory>
+    </Directory>
+
+    <!-- Complete feature which will be installed. -->
+    <Feature Id="Complete"
+         Title="CowboyFS"
+         Level="1"
+         Display="expand"
+         ConfigurableDirectory="INSTALLLOCATION">
+
+      <!-- Main content of the Complete feature. -->
+      <Feature Id="MainContent"
+               Title="CowboyFS Website"
+               Description="CowboyFS is a web based file browser. It is light weight, optimised for mobile clients and provides fast, read-only views over your document libraries."
+               Level="1">
+
+        <!-- Include IIS Configuration. -->
+        <ComponentGroupRef Id="MyWebIssConfiguration" />
+
+        <!-- Include web content. -->
+        <ComponentGroupRef Id="MyWebWebComponents" />
+
+      </Feature>
+    </Feature>
+
+    <!-- .NET Framework 4.5 must be installed -->
+    <Property Id="FRAMEWORKBASEPATH">
+      <RegistrySearch Id="FindFrameworkDir" Root="HKLM"
+        Key="SOFTWARE\Microsoft\.NETFramework"
+        Name="InstallRoot" Type="raw"/>
+    </Property>
+
+    <Property Id="ASPNETREGIIS" >
+      <DirectorySearch Path="[FRAMEWORKBASEPATH]"
+                  Depth="4" Id="FindAspNetRegIis">
+        <FileSearch Name="aspnet_regiis.exe" MinVersion="4.0.3"/>
+      </DirectorySearch>
+    </Property>
+
+    <!-- Switch ASP.NET to version 2.0 -->
+    <CustomAction Id="MakeWepApp40" Directory="MYWEBWEBSITE"
+      ExeCommand="[ASPNETREGIIS] -norestart -s W3SVC/1/ROOT/[WEB_APP_NAME]"
+      Return="check"/>
+
+    <InstallExecuteSequence>
+      <Custom Action="MakeWepApp40" After="InstallFinalize">
+        ASPNETREGIIS AND NOT Installed
+      </Custom>
+    </InstallExecuteSequence>
+
+    <!-- License and images -->
+    <WixVariable Id="WixUILicenseRtf" Value=".\License.rtf" />
+
+    <!-- Specify UI -->
+    <UIRef Id="CowboyFSUI" />
+    
+	</Product>
+</Wix>
