@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+	<Fragment>
+    <ComponentGroup Id="Shortcuts">
+
+      <Component Id="StartMenuShortcut" Guid="B828A736-06BC-41E3-B159-3D00F2CBD875"  Directory="ApplicationProgramsFolder">       
+        <util:InternetShortcut Id="CowboyFSMenuShortcut"
+                                   Name="CowboyFS" 
+                                   Target="http://localhost/cowboyfs/"          
+                                   />
+        <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall"/>
+        <RegistryValue Root="HKCU" Key="Software\Microsoft\CowboyFS" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+      </Component>
+      
+      <Component Id="DesktopShortcut" Guid="4735F5F1-F3CE-4D6D-A21C-53F346F67602" Directory="ApplicationProgramsFolder">
+        <util:InternetShortcut Id="CowboyFSDesktopShortcut"
+                               Directory="DesktopFolder"
+                               Name="CowboyFS"
+                               Type="url"
+                               Target="http://localhost/cowboyfs/"/>
+        <RegistryValue Root="HKCU" Key="Software\Microsoft\CowboyFS" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+      </Component>      
+    </ComponentGroup>
+	</Fragment>
+</Wix>

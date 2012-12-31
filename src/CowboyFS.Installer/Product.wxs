@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" 
-  xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
+  xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension"
+  xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+  
 	<Product Id="*" Name="CowboyFS" Language="1033" Version="1.0.0.0" Manufacturer="Padgett" UpgradeCode="60ae5f21-f6fc-46d5-9170-3526fc67c8b3">
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
@@ -31,6 +33,13 @@
           <!-- Here you can add another directories -->
         </Directory>
       </Directory>
+    
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ApplicationProgramsFolder" Name="CowboyFS"/>
+      </Directory>
+      
+      <Directory Id="DesktopFolder" Name="Desktop"/>
+    
     </Directory>
 
     <!-- Complete feature which will be installed. -->
@@ -52,6 +61,10 @@
         <!-- Include web content. -->
         <ComponentGroupRef Id="MyWebWebComponents" />
 
+        <!-- Include shortcuts -->
+        <ComponentGroupRef Id="Shortcuts" />
+        
+        
       </Feature>
     </Feature>
 
@@ -69,7 +82,7 @@
       </DirectorySearch>
     </Property>
 
-    <!-- Switch ASP.NET to version 2.0 -->
+    <!-- Switch ASP.NET to version 4.0 -->
     <CustomAction Id="MakeWepApp40" Directory="MYWEBWEBSITE"
       ExeCommand="[ASPNETREGIIS] -norestart -s W3SVC/1/ROOT/[WEB_APP_NAME]"
       Return="check"/>
@@ -85,6 +98,17 @@
 
     <!-- Specify UI -->
     <UIRef Id="CowboyFSUI" />
-    
-	</Product>
+
+    <!-- Desktop shortcut -->
+    <!--<Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="DesktopFolder" Name="Desktop"/>
+
+      <util:InternetShortcut Id="WebAppShortcut"
+            Directory="DesktopFolder"
+            Name="CowboyFS"
+            Type="url"
+            Target="http://localhost/cowboyfs/"/>
+    </Directory>-->
+
+  </Product>
 </Wix>

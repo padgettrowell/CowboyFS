@@ -6,8 +6,4 @@
   <!-- +++++++++++++++++++ web app name properties initialize ++++++++++++++++++++ -->
   <Property Id="WEB_APP_NAME" Value="CowboyFS" />
 
-  <!-- +++++++++++++++++++ app pool identity properties initialize +++++++++++++++ -->
-  <Property Id="WEB_APP_POOL_IDENTITY_NAME" Value="CowboyFS" />
-  <Property Id="WEB_APP_POOL_IDENTITY_PWD" Value="pAssw0rD!@" Hidden="yes" />
-
 </Include>

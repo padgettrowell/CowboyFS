@@ -24,6 +24,7 @@
     <Compile Include="IISConfiguration.wxs" />
     <Compile Include="CowboyFSUI.wxs" />
     <Compile Include="Product.wxs" />
+    <Compile Include="Shortcuts.wxs" />
     <Compile Include="WebSiteContent.wxs" />
   </ItemGroup>
   <ItemGroup>

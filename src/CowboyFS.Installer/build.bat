@@ -13,5 +13,5 @@ del %publishFolder%Web.Release.config
 REM Harvest all content of published result
 heat dir %publishFolder% -dr MYWEBWEBSITE -ke -srd -cg MyWebWebComponents -var var.publishDir -gg -out WebSiteContent.wxs
 REM At last create an installer
-candle -ext WixIISExtension -ext WixUtilExtension -ext WiXNetFxExtension -dpublishDir=%publishFolder% -dMyWebResourceDir=. IisConfiguration.wxs Product.wxs WebSiteContent.wxs CowboyFSUI.wxs
-light -ext WixUIExtension -ext WixIISExtension -ext WixUtilExtension -ext WiXNetFxExtension -out bin\Release\CowboyFS.msi Product.wixobj WebSiteContent.wixobj CowboyFSUI.wixobj IisConfiguration.wixobj
+candle -ext WixIISExtension -ext WixUtilExtension -ext WiXNetFxExtension -dpublishDir=%publishFolder% -dMyWebResourceDir=. IisConfiguration.wxs Product.wxs WebSiteContent.wxs Shortcuts.wxs CowboyFSUI.wxs
+light -ext WixUIExtension -ext WixIISExtension -ext WixUtilExtension -ext WiXNetFxExtension -out bin\Release\CowboyFS.msi Product.wixobj WebSiteContent.wixobj Shortcuts.wixobj CowboyFSUI.wixobj IisConfiguration.wixobj

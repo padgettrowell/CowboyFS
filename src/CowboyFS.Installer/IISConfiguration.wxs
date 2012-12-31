@@ -14,28 +14,31 @@
     <DirectoryRef Id="MYWEBWEBSITE">
       <!-- Configuring app pool -->
       <Component Id="MyWebAppPoolCmp" Guid="" KeyPath="yes">
-        <util:User Id="MyWebAppPoolUser"
-                   CreateUser="yes"
-                   Name="[WEB_APP_POOL_IDENTITY_NAME]"
-                   Password="[WEB_APP_POOL_IDENTITY_PWD]" />
         <iis:WebAppPool Id="MyWebAppPool"
                         Name="CowboyFS"
-                        Identity="other"
-                        User="MyWebAppPoolUser" />
+                        ManagedRuntimeVersion="v4.0"
+                        ManagedPipelineMode="integrated"
+                        />
       </Component>
 
       <!-- Configure virtual dir -->
       <Component Id="MyWebVirtualDirCmp"
              Guid="{751DEB01-ECC1-48ff-869A-65BCEE9E0528}"
              KeyPath="yes" >
-        <iis:WebVirtualDir Id="MyWebVirtualDir"
-                  Alias="CowboyFS" Directory="MYWEBWEBSITE"
-                  WebSite="DefaultWebSite">
+        <iis:WebVirtualDir
+                  Id="MyWebVirtualDir"
+                  Alias="CowboyFS"
+                  Directory="MYWEBWEBSITE"
+                  WebSite="DefaultWebSite"
+                  >
           <iis:WebDirProperties Id="MyWebVirtDirProperties"
-             AnonymousAccess="no" BasicAuthentication="no"
+             AnonymousAccess="no"
+             BasicAuthentication="no"
              WindowsAuthentication="yes" />
           <iis:WebApplication Id="MyWebWebApplication"
-             Name="CowboyFS" />
+             WebAppPool="MyWebAppPool"
+             Name="CowboyFS"
+            />
         </iis:WebVirtualDir>
       </Component>
     </DirectoryRef>
