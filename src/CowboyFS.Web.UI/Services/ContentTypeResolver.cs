@@ -19,6 +19,8 @@ namespace CowboyFS.Web.UI.Services
                 extension = "." + extension;
             }
 
+            extension = extension.ToLower();
+
             switch (extension)
             {
                     #region Big freaking list of mime types

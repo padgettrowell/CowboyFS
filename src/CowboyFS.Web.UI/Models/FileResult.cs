@@ -23,7 +23,7 @@
                 if (FileName.IndexOf(".") == -1)
                     return "file.png";
 
-                var extension = FileName.Substring(FileName.LastIndexOf("."));
+                var extension = FileName.Substring(FileName.LastIndexOf(".")).ToLower();
                 switch (extension)
                 {
                     case ".pdf":
