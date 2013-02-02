@@ -28,7 +28,7 @@ namespace CowboyFS.Web.UI.Controllers
             return View(new BrowseViewModel(selectedLibrary, relPath, _repository.FetchResultsForPath(selectedLibrary, relPath)));
         }
 
-        public ActionResult ViewFile(int library, string relPath, bool returnAsFileDownload = false)
+        public ActionResult ViewFile(int library, string relPath)
         {
             Library selectedLibrary;
 
@@ -43,7 +43,45 @@ namespace CowboyFS.Web.UI.Controllers
 
             string contentType = ContentTypeResolver.ContentTypeForExtension(fileInfo.Extension);
 
-            return returnAsFileDownload ? File(fileInfo.FullName, contentType, fileInfo.Name) : File(fileInfo.FullName, contentType);
+            return File(fileInfo.FullName, contentType);
         }
+
+        public ActionResult DownloadFile(int library, string relPath)
+        {
+            Library selectedLibrary;
+
+            // if we don't have a valid library, return to the index
+            if (!_repository.TryGetLibrary(library, out selectedLibrary))
+                RedirectToAction("Index");
+
+            var fileInfo = new System.IO.FileInfo(selectedLibrary.MakePathAbsoluteFromLibrary(relPath));
+
+            if (!selectedLibrary.IsDescendant(fileInfo.FullName))
+                throw new HttpException(403, "No no no!");
+
+            string contentType = ContentTypeResolver.ContentTypeForExtension(fileInfo.Extension);
+
+            return File(fileInfo.FullName, contentType, fileInfo.Name);
+        }
+
+
+        public ActionResult EmailFile(int library, string relPath)
+        {
+            Library selectedLibrary;
+
+            // if we don't have a valid library, return to the index
+            if (!_repository.TryGetLibrary(library, out selectedLibrary))
+                RedirectToAction("Index");
+
+            var fileInfo = new System.IO.FileInfo(selectedLibrary.MakePathAbsoluteFromLibrary(relPath));
+
+            if (!selectedLibrary.IsDescendant(fileInfo.FullName))
+                throw new HttpException(403, "No no no!");
+
+            //ToDo email file.
+
+            return new EmptyResult();
+        }
+
     }
 }
